@@ -307,6 +307,11 @@ namespace $safeprojectname$.Dialogs
                 Prompt = stepContext.Options as Activity ?? _templateEngine.GenerateActivityForLocale("FirstPromptMessage")
             };
 
+            if (stepContext.SuppressCompletionMessage())
+            {
+                promptOptions.Prompt = null;
+            }
+
             return await stepContext.PromptAsync(nameof(TextPrompt), promptOptions, cancellationToken);
         }
 

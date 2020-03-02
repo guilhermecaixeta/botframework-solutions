@@ -307,6 +307,11 @@ namespace VirtualAssistantSample.Dialogs
                 Prompt = stepContext.Options as Activity ?? _lgFileManager.GenerateActivityForLocale("FirstPromptMessage")
             };
 
+            if (stepContext.SuppressCompletionMessage())
+            {
+                promptOptions.Prompt = null;
+            }
+
             return await stepContext.PromptAsync(nameof(TextPrompt), promptOptions, cancellationToken);
         }
 
